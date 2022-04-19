@@ -6,5 +6,5 @@ class MainWindow : public QWindow {
 	Q_OBJECT
 
 public:
-	MainWindow(QWindow* parent = nullptr);
+	explicit MainWindow(QWindow* parent = nullptr);
 };

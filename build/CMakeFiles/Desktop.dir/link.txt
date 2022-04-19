@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/Desktop.dir/Desktop_autogen/mocs_compilation.cpp.o CMakeFiles/Desktop.dir/main.cpp.o CMakeFiles/Desktop.dir/MainWindow.cpp.o -o Desktop  /usr/lib/libQt6Gui.so.6.2.3 /usr/lib/libQt6Core.so.6.2.3 -pthread /usr/lib/libGLX.so /usr/lib/libOpenGL.so 
