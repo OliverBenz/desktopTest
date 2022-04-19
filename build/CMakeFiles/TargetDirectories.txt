@@ -1,0 +1,4 @@
+/home/oliver/dev/DesktopTest/build/CMakeFiles/Desktop.dir
+/home/oliver/dev/DesktopTest/build/CMakeFiles/edit_cache.dir
+/home/oliver/dev/DesktopTest/build/CMakeFiles/rebuild_cache.dir
+/home/oliver/dev/DesktopTest/build/CMakeFiles/Desktop_autogen.dir
