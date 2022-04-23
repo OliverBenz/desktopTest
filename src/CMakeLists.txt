@@ -1,5 +1,5 @@
 # ----- Get QT6 -----
-find_package(Qt6 REQUIRED COMPONENTS Gui)
+find_package(Qt6 REQUIRED COMPONENTS Gui Widgets)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -20,7 +20,7 @@ add_executable(${targetName}
 )
 
 # Linking
-target_link_libraries(${targetName} PRIVATE Qt6::Gui)
+target_link_libraries(${targetName} PRIVATE Qt6::Gui Qt6::Widgets)
 
 # Setup project settings
 set_project_warnings(${targetName})      # Which warnings to enable

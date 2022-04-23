@@ -1,12 +1,16 @@
-#include <QGuiApplication>
+#include <QApplication>
 
-#include "MainWindow.hpp"
+#include "MainWidget.hpp"
 
 int main(int argc, char** argv){
-    QGuiApplication application(argc, argv);
+    QApplication application(argc, argv);
 
-	MainWindow window;
-	window.show();
+    static constexpr int width = 1080;
+    static constexpr int height = 720;
+
+    MainWidget widget;
+    widget.resize(width, height);
+	widget.show();
 
 	return application.exec();
 }
