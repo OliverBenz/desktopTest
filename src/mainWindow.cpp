@@ -1,6 +1,6 @@
-#include "MainWidget.hpp"
+#include "mainWindow.hpp"
 
-MainWidget::MainWidget(QWidget* parent) : QWidget(parent)
+mainWindow::mainWindow(QWidget* parent) : QWidget(parent)
 {
     // Create all widgets
     m_layout = new QVBoxLayout(this);
@@ -19,7 +19,7 @@ MainWidget::MainWidget(QWidget* parent) : QWidget(parent)
     setConnections();     // Configure connections of this widget
 }
 
-void MainWidget::setConnections() {
+void mainWindow::setConnections() {
     // Add item to list
     connect(m_addButton, SIGNAL(clicked()), this, SLOT(addItem()));
     connect(m_edit, SIGNAL(returnPressed()), this, SLOT(addItem()));
@@ -31,27 +31,27 @@ void MainWidget::setConnections() {
     connect(m_delButton, SIGNAL(clicked()), this, SLOT(deleteSelected()));
 }
 
-void MainWidget::addItem() {
+void mainWindow::addItem() {
     if(!m_edit->text().isEmpty()) {
         m_list->addItem(m_edit->text());
     }
     m_edit->clear();
 }
 
-void MainWidget::deleteSelected() {
+void mainWindow::deleteSelected() {
     if(!m_list->selectedItems().empty()) {
         for(auto item: m_list->selectedItems())
             delete item;
     }
 }
 
-void MainWidget::updateClicked(QListWidgetItem* item) {
+void mainWindow::updateClicked(QListWidgetItem* item) {
     Q_ASSERT(item);
 
     item->setText(item->text() + "+");
 }
 
-MainWidget::~MainWidget() {
+mainWindow::~mainWindow() {
     delete m_delButton;
     delete m_addButton;
     delete m_edit;

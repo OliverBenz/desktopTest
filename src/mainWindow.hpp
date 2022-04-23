@@ -7,12 +7,12 @@
 #include <QPushButton>
 #include <QLineEdit>
 
-class MainWidget : public QWidget {
+class mainWindow : public QWidget {
 	Q_OBJECT
 
 public:
-	explicit MainWidget(QWidget* parent = nullptr);
-    ~MainWidget();
+	explicit mainWindow(QWidget* parent = nullptr);
+    ~mainWindow();
 
 private:
     //! Setup which slots to use for which signals.
