@@ -6,6 +6,7 @@
 #include <QListWidget>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QTableWidget>
 
 class searchWindow : public QWidget {
 	Q_OBJECT
@@ -15,22 +16,23 @@ public:
     ~searchWindow();
 
 private:
-    //! Setup which slots to use for which signals.
+    //! Setup which slots to use widget signals.
     void setConnections();
 
-// When a widget sends out a signal->This signal can trigger a slot function to be called.mainWindow
 public slots:
-
-// Our widget can also send out signals->None are defined yet
-signals:
+    //! Start search for items.
+    void search();
 
 private:
     QVBoxLayout* m_layoutMain;    //!< Stacks the added widgets vertically
 
     // Search bar
     QHBoxLayout* m_layoutSrField; //!< Layout of the search fields.
-    QLineEdit* m_editName;  //!< Input for object name.
-    QLineEdit* m_editId;    //!< Input for object id.
-    QLineEdit* m_editLoc;   //!< Input for object location.
+    QLineEdit* m_editName;        //!< Input for object name.
+    QLineEdit* m_editId;          //!< Input for object id.
+    QLineEdit* m_editLoc;         //!< Input for object location.
+    QPushButton* m_buttonSr;      //!< Button to start searching.
+
+    QTableWidget* m_tableSrResult;  //!< Table that display the search result.
 
 };
