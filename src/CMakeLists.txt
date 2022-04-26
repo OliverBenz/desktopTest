@@ -1,5 +1,5 @@
 # ----- Get QT6 -----
-find_package(Qt6 REQUIRED COMPONENTS Gui Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Gui Widgets Sql)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -20,7 +20,7 @@ add_executable(${targetName}
         itemWindow.cpp itemWindow.hpp)
 
 # Linking
-target_link_libraries(${targetName} PRIVATE Qt6::Gui Qt6::Widgets)
+target_link_libraries(${targetName} PRIVATE Qt6::Gui Qt6::Widgets Qt6::Sql)
 
 # Setup project settings
 set_project_warnings(${targetName})      # Which warnings to enable

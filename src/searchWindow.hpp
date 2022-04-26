@@ -19,6 +19,8 @@ private:
     //! Setup which slots to use widget signals.
     void setConnections();
 
+    void fillTestData();
+
 public slots:
     //! Start search for items.
     void search();
