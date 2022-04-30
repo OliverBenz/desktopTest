@@ -1,7 +1,7 @@
 #include "searchWindow.hpp"
 
 #include <QHeaderView>
-#include "dbManager.hpp"
+#include "lib/dbManager.hpp"
 
 searchWindow::searchWindow(QWidget* parent) : QWidget(parent)
 {

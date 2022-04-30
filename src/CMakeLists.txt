@@ -17,7 +17,7 @@ file(GLOB_RECURSE headerFiles ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
 add_executable(${targetName}
     ${sourceFiles}
     ${headerFiles}
-        itemWindow.cpp itemWindow.hpp)
+)
 
 # Linking
 target_link_libraries(${targetName} PRIVATE Qt6::Gui Qt6::Widgets Qt6::Sql)

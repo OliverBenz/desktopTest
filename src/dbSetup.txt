@@ -1,0 +1,7 @@
+1) Install mariadb etc
+2) Configure as in this link: https://www.vultr.com/docs/how-to-install-mariadb-10-3-or-mysql-8-0-on-arch-linux/
+3) Create database and tables (https://github.com/OliverBenz/Inventory_Setup/blob/master/db.sql)
+    - Table "testItems" is just a copy of table "items"
+4) Create user oliver
+    - Grant all access to database inventory.items (remember to "flush privileges"!)
+5)
