@@ -3,6 +3,11 @@
 #include <QtSql>
 #include <QSqlDatabase>
 
+
+// Queries
+const QString postItem = R"(INSERT INTO items VALUES (0, "{}", "{}", {}, {});)";
+const QString getLocations = "SELECT id, locationId, name, description FROM placement";
+
 //! Helper class to handle database access.
 struct dbHelper {
     QSqlDatabase m_database;
@@ -28,7 +33,6 @@ dbHelper::dbHelper() {
     m_database.setHostName("127.0.0.1");
     m_database.setUserName("oliver");
     m_database.setPassword("1234");
-    // m_database.setDatabaseName("workout");
     m_database.setDatabaseName("inventory");
 }
 
@@ -59,7 +63,7 @@ dbManager::dbManager(dbManager&& other) noexcept : m_dbHelper(nullptr) {
     std::swap(m_dbHelper, other.m_dbHelper);
 }
 
-dbManager& dbManager::operator=(dbManager&& other) {
+dbManager& dbManager::operator=(dbManager&& other) noexcept {
     if (this != &other) {
         std::swap(m_dbHelper, other.m_dbHelper);
     }
@@ -68,12 +72,13 @@ dbManager& dbManager::operator=(dbManager&& other) {
 
 // ----- dbManager functions -----
 std::vector<double> dbManager::getTestData() {
-    const QSqlQuery query = m_dbHelper->executeQuery("SELECT * FROM items");
-
+    //const QSqlResult* result = m_dbHelper->executeQuery(getLocations);
+    //if(result->size() != -1) {}
     // TODO: Read result from query
     // TODO: Check how exactly a query is build in QT and improve architecture.
     return {};
 }
+
 
 void dbManager::setTestData() {
     // Continue instructions
@@ -82,9 +87,9 @@ void dbManager::setTestData() {
     //  - Where to store data? We dont want to copy large amounts of data all the time..
 
     struct {
-        std::string id;
-        std::string name;
-        std::string location;
+        QString id;
+        QString name;
+        QString location;
     } values[4] = {
             {"ABB01", "Laptop", "Keller Regal 1"},
             {"ABB02", "Ladekabel", "Keller Regal 1"},
@@ -95,12 +100,10 @@ void dbManager::setTestData() {
     // TODO: Get all data from testItems
     // TODO: Some queries are already in https://github.com/OliverBenz/Inventory_Desktop/blob/master/Desktop/lib/dbHelper.cpp#L83
 
-    // TODO: Data has to be sanitized!
-    // "INSERT INTO items VALUES (0, \"" + i.name + "\", \"" + i.description + "\", " + std::to_string(i.placementId()) + ", " + std::to_string(i.categoryId()) + ");"
-
+    // TODO: Data has to be sanitized
+    // TODO: Do inserts etc in sql transactions.
     // Insert test data to databases
-    const QSqlQuery query = m_dbHelper->executeQuery("");
-
-}
+    for(std::size_t i = 0; i < 4; i++)
+        const QSqlQuery query = m_dbHelper->executeQuery(std::format(postItem, values[i].name, values[i].description, values[i].placementId, values[i].categoryId);
 
 }

@@ -7,11 +7,11 @@ struct dbHelper;
 
 class dbManager {
 public:
-    explicit dbManager();                         // Default constructor
-    ~dbManager();                                 // Destructor
-    dbManager& operator=(const dbManager& other); // Copy assignment operator
-    dbManager(dbManager&& other) noexcept;        // Move constructor
-    dbManager& operator=(dbManager&& other);      // Move assignment operator
+    explicit dbManager();                             // Default constructor
+    ~dbManager();                                     // Destructor
+    dbManager& operator=(const dbManager& other);     // Copy assignment operator
+    dbManager(dbManager&& other) noexcept;            // Move constructor
+    dbManager& operator=(dbManager&& other) noexcept; // Move assignment operator
 
 // Testing stuff
 public:

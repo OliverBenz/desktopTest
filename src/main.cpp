@@ -12,6 +12,7 @@ int main(int argc, char** argv){
     searchWindow widget;
     // itemWindow widget;
     // plotWindow widget;
+
     widget.show();
 
 	return application.exec();
