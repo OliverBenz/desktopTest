@@ -1,6 +1,7 @@
 #include "searchWindow.hpp"
 
 #include <QHeaderView>
+#include <QTableWidgetItem>
 #include "lib/dbManager.hpp"
 
 searchWindow::searchWindow(QWidget* parent) : QWidget(parent)
@@ -47,28 +48,16 @@ void searchWindow::setConnections() {
     // TODO: Enter pressed on input
 }
 
-#include <QTableWidgetItem>
 void searchWindow::fillTestData() {
     dbManager database;
-    auto result = database.getTestData();
-
-    struct {
-        QString id;
-        QString name;
-        QString location;
-    } values[4] = {
-        {"ABB01", "Laptop", "Keller Regal 1"},
-        {"ABB02", "Ladekabel", "Keller Regal 1"},
-        {"ABB03", "Mikrofon", "Keller Regal 1"},
-            {"ABB04", "Mikrofon Kabel langer text", "Keller Regal 1"}
-    };
+    std::vector<placement> result = database.getTestData();
 
     // TODO: Is table correct for this? Maybe list of items and item is custom widget with text horizontally.
     m_tableSrResult->setRowCount(3);
-    for(int i = 0; i < 3; ++i) {
-        m_tableSrResult->setItem(i, 0, new QTableWidgetItem(values[i].id));
-        m_tableSrResult->setItem(i, 1, new QTableWidgetItem(values[i].name));
-        m_tableSrResult->setItem(i, 2, new QTableWidgetItem(values[i].location));
+    for(std::size_t i = 0; i != result.size(); ++i) {
+        m_tableSrResult->setItem(static_cast<int>(i), 0, new QTableWidgetItem(result[i].id));
+        m_tableSrResult->setItem(static_cast<int>(i), 1, new QTableWidgetItem(result[i].name.c_str()));
+        m_tableSrResult->setItem(static_cast<int>(i), 2, new QTableWidgetItem(result[i].location.c_str()));
     }
 }
 

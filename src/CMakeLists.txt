@@ -19,8 +19,13 @@ add_executable(${targetName}
     ${headerFiles}
 )
 
+# External dependencies
+include(FetchFmt.cmake)
+
 # Linking
-target_link_libraries(${targetName} PRIVATE Qt6::Gui Qt6::Widgets Qt6::Sql)
+target_link_libraries(${targetName} PRIVATE
+    fmt::fmt
+    Qt6::Gui Qt6::Widgets Qt6::Sql)
 
 # Setup project settings
 set_project_warnings(${targetName})      # Which warnings to enable

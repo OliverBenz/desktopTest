@@ -1,5 +1,8 @@
 #pragma once
 
+#include "item.hpp"
+#include "placement.hpp"
+
 #include <vector>
 #include <memory>
 
@@ -15,7 +18,7 @@ public:
 
 // Testing stuff
 public:
-    std::vector<double> getTestData();
+    std::vector<placement> getTestData();
     void setTestData();
 
 private:

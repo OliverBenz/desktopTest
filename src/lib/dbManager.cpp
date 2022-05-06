@@ -2,11 +2,14 @@
 
 #include <QtSql>
 #include <QSqlDatabase>
+#include <fmt/core.h>
 
+#include <string>
 
 // Queries
-const QString postItem = R"(INSERT INTO items VALUES (0, "{}", "{}", {}, {});)";
-const QString getLocations = "SELECT id, locationId, name, description FROM placement";
+const std::string postItem = R"(INSERT INTO items VALUES (0, "{}", "{}", {}, {});)";
+const std::string getItems = "";
+const std::string getPlacements = "SELECT id, locationId, name, description FROM placement";
 
 //! Helper class to handle database access.
 struct dbHelper {
@@ -37,13 +40,15 @@ dbHelper::dbHelper() {
 }
 
 QSqlQuery dbHelper::executeQuery(const QString& command) {
-    m_database.open();
+    if(m_database.open()) {
+		QSqlQuery query;
+		query.exec(command);
+		m_database.close();
 
-    QSqlQuery query;
-    query.exec(command);
-    m_database.close();
+		return query;
+	}
 
-    return query;
+	return QSqlQuery();
 }
 
 
@@ -71,9 +76,10 @@ dbManager& dbManager::operator=(dbManager&& other) noexcept {
 }
 
 // ----- dbManager functions -----
-std::vector<double> dbManager::getTestData() {
-    //const QSqlResult* result = m_dbHelper->executeQuery(getLocations);
-    //if(result->size() != -1) {}
+std::vector<placement> dbManager::getTestData() {
+    const QSqlQuery result = m_dbHelper->executeQuery(getPlacements.c_str());
+	while(result.next())
+	//if(result->size() != -1) {}
     // TODO: Read result from query
     // TODO: Check how exactly a query is build in QT and improve architecture.
     return {};
@@ -86,24 +92,13 @@ void dbManager::setTestData() {
     //  - test insert statement on vector of this data
     //  - Where to store data? We dont want to copy large amounts of data all the time..
 
-    struct {
-        QString id;
-        QString name;
-        QString location;
-    } values[4] = {
-            {"ABB01", "Laptop", "Keller Regal 1"},
-            {"ABB02", "Ladekabel", "Keller Regal 1"},
-            {"ABB03", "Mikrofon", "Keller Regal 1"},
-            {"ABB04", "Mikrofon Kabel langer text", "Keller Regal 1"}
-    };
-
     // TODO: Get all data from testItems
     // TODO: Some queries are already in https://github.com/OliverBenz/Inventory_Desktop/blob/master/Desktop/lib/dbHelper.cpp#L83
 
     // TODO: Data has to be sanitized
     // TODO: Do inserts etc in sql transactions.
     // Insert test data to databases
-    for(std::size_t i = 0; i < 4; i++)
-        const QSqlQuery query = m_dbHelper->executeQuery(std::format(postItem, values[i].name, values[i].description, values[i].placementId, values[i].categoryId);
+    // for(std::size_t i = 0; i < 4; i++)
+        // const QSqlQuery query = m_dbHelper->executeQuery(fmt::format(postItem, values[i].name, values[i].description, values[i].placementId, values[i].categoryId);
 
 }
